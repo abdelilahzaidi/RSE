@@ -1,0 +1,168 @@
+﻿@model MVC.Models.ViewModel.TaskDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Html.ActionLink(Model.ProjectName, "Details", new { controller = "Project", id = Model.ProjectId })</h2>
+<h3>@Html.DisplayFor(model => model.Name)</h3>
+<div>
+    <h5>Informations principale</h5>
+    <hr />
+    <dl class="dl-horizontal">
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.TaskStateId)
+        @Html.HiddenFor(model => model.MainTaskId)
+        @Html.HiddenFor(model => model.ProjectId)
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskTeam)
+        </dt>
+
+        <dd>
+            @if (Model.TaskTeam == true)
+            {
+                <span>Équipe</span>
+            }
+            else
+            {
+                <span>Employé</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentOn)
+        </dt>
+
+        <dd>
+            @if (Model.TaskTeam)
+            {
+                if (Model.CurrentOn.Id == 0)
+                {
+                    <span>Non assignée</span>
+                    <br />
+                    @Html.ActionLink("Assigner une équipe en charge de la tâche", "AssignTeam", new { id = Model.Id });
+                }
+                else
+                {
+                    @Html.ActionLink(Model.CurrentOn.Name, "Details", new { controller = "Team", id = Model.CurrentOn.Id });
+                    <br />
+                    @Html.ActionLink("Changer l'équipe en charge de la tâche", "AssignTeam", new { id = Model.Id });
+                }
+            }
+            else
+            {
+                if (Model.CurrentOn.Id == 0)
+                {
+                    <span>Non assignée</span>
+                    <br />
+                    @Html.ActionLink("Assigner une personne en charge de la tâche", "AssignEmployee", new { id = Model.Id });
+                }
+                else
+                {
+                    @Html.ActionLink(Model.CurrentOn.Name, "Details", new { controller = "Employee", id = Model.CurrentOn.Id });
+                    <br />
+                    @Html.ActionLink("Changer la personne en charge de la tâche", "AssignEmployee", new { id = Model.Id });
+                }
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeadLine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeadLine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaskState)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.Id })
+</p>
+@if (Model.MainTaskId != null)
+{
+    <div>
+        <h5>Tâche principale</h5>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.MainTaskName)
+            </dt>
+
+            <dd>
+                @Html.ActionLink(Model.MainTaskName, "Details", new { id = Model.MainTaskId })
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MainTaskState)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MainTaskState)
+            </dd>
+        </dl>
+    </div>
+}
+@if (Model.SubTasks.Count() != 0)
+{
+    <div>
+        <h5>@Html.DisplayNameFor(model => model.SubTasks)</h5>
+        <hr />
+        @Html.Partial("_TaskList", Model.SubTasks)
+    </div>
+}
+
+
+<div>
+    <h5>@Html.DisplayNameFor(model => model.Subjects)</h5>
+    <hr />
+    <p>
+        @Html.ActionLink("Rédiger un nouveau sujet", "NewSubject", new { id = Model.Id })
+    </p>
+    @if (Model.Subjects.Count() != 0)
+    {
+        @Html.Partial("_SubjectList", Model.Subjects)}
+    else
+    {
+        <span>Aucun sujet en cours</span>
+    }
+</div>
+
+<div>
+    <h5>@Html.DisplayNameFor(model => model.Docs)</h5>
+    <hr />
+    @if (Model.Docs.Count() != 0)
+    {
+        <p>
+            @Html.ActionLink("Ajouter un nouveau document", "NewDoc", new { id = Model.Id })
+        </p>
+        @Html.Partial("_DocumentList", Model.Docs)}
+    else
+    {
+        <span>Aucun document</span>
+        <p>
+            @Html.ActionLink("Ajoutez votre premier document", "NewDoc", new { id = Model.Id })
+        </p>
+    }
+</div>
+
+<p>
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Retour au projet", "Details", new { controller = "Project", id = Model.ProjectId })
+</p>

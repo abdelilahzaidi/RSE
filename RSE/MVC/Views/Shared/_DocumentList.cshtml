@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MVC.Models.ViewModel.DocumentList>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Extention)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.OldFileId)
+        </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Extention)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedDate)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.OldFileId)
+                </td>*@
+                <td>
+                    @Html.ActionLink("Modifier", "Edit", new { controller = "Document", id = item.Id }) |
+                    @Html.ActionLink("Détails", "Details", new { controller = "Document", id = item.Id }) |
+                    @Html.ActionLink("Télécharger", "Download", new { controller = "Document", id = item.Id })
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

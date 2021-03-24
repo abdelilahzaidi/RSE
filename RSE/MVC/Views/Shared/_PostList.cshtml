@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MVC.Models.ViewModel.MessageListItem>
+@Styles.Render(@"~/Content/subjectMessage.css")
+
+<table class="table tb-post">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td rowspan="3">
+                @Html.ActionLink(item.Sender.Name, "Details", new { controller = "Employee", id = item.Sender.Id })
+            </td>
+            <td>
+                <strong>@Html.DisplayFor(modelItem => item.Title)</strong>
+            </td>
+            <td style="font-size:0.75em;">
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+        </tr>
+        <tr>
+            <td class="MessageText" colspan="2">
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="font-size:0.75em;">
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,81 @@
+﻿@model MVC.Models.ViewModel.TeamDetail
+@{MVC.Models.User UserSession = (MVC.Models.User)HttpContext.Current.Session["User"];}
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>L'équipe @Model.Name</h2>
+
+<div>
+    <h4>Informations générales</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamManager)
+        </dt>
+
+        <dd>
+            @Html.ActionLink(Model.TeamManager.Name, "Details", new { controller = "Employee", id = Model.TeamManager.Id })
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.Id })
+</p>
+<div>
+    <h4>@Html.DisplayNameFor(model => model.Members)</h4>
+    <hr />
+    <p>
+        @if (UserSession.Id == Model.TeamManager.Id)
+        {
+            @Html.ActionLink("Assigner des membres à l'équipe", "AddEmployee", new { controller = "Team", id = Model.Id })
+        }
+    </p>
+    <p>
+        @if (UserSession.Id == Model.TeamManager.Id)
+        {
+            @Html.ActionLink("Supprimer des membres de l'équipe", "DelEmployee", new { controller = "Team", id = Model.Id })
+        }
+    </p>
+    <div>
+        @Html.Partial("_EmployeeList", Model.Members)
+    </div>
+</div>
+<div>
+    <h4>@Html.DisplayNameFor(model => model.Conversations)</h4>
+    <hr />
+    <p>
+        @Html.ActionLink("Rédiger une nouvelle conversation", "NewMessage", new { id = Model.Id })
+    </p>
+    @Html.Partial("_ConversationList", Model.Conversations)
+</div>
+<div>
+    <h5>@Html.DisplayNameFor(model => model.Docs)</h5>
+    <hr />
+    @if (Model.Docs.Count() != 0)
+    {
+        <p>
+            @Html.ActionLink("Ajouter un nouveau document", "NewDoc", new { id = Model.Id })
+        </p>
+        @Html.Partial("_DocumentList", Model.Docs)}
+    else
+    {
+        <span>Aucun document</span>
+        <p>
+            @Html.ActionLink("Ajoutez votre premier document", "NewDoc", new { id = Model.Id })
+        </p>
+    }
+</div>
+<p>
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.Id }) |
+@Html.ActionLink("Retour vers le projet", "Details", new { controller = "Project", id = Model.ProjectId })
+</p>

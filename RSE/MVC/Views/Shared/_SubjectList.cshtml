@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MVC.Models.ViewModel.SubjectListItem>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastSender)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.ActionLink(item.Sender.Name, "Details", new { controller = "Employee", id = item.Sender.Id })
+                </td>
+                <td>
+                    <b>@Html.DisplayFor(modelItem => item.Title)</b>
+                    <br />
+                    @Html.DisplayFor(modelItem => item.LastMessage)
+                </td>
+                <td>
+                    @Html.ActionLink(item.LastSender.Name, "Details", new { controller = "Employee", id = item.LastSender.Id })
+                    <br />
+                    @Html.DisplayFor(modelItem => item.LastDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Lire", "Subject", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

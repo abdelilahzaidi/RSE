@@ -1,0 +1,7 @@
+﻿.navbar {
+    background-color: #35012C!important;
+}
+
+.navbar-nav > li > a:hover, .navbar-collapse > a:hover {
+    background-color: #F2806A !important;
+}

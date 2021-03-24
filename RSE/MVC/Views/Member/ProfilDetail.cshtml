@@ -1,0 +1,12 @@
+﻿@model MVC.Models.ViewModel.EmployeeDetails
+
+@{
+    ViewBag.Title = "ProfilDetail";
+}
+
+@Html.Partial("_EmployeeDetail",Model)
+<p>
+    @Html.ActionLink("Modifier", "ProfilEdit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Changer votre statut", "CreateStatus") |
+    @Html.ActionLink("Retour à la page d'accueil", "Index")
+</p>

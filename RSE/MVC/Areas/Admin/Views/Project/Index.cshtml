@@ -1,0 +1,12 @@
+﻿@model IEnumerable<MVC.Areas.Admin.Models.ViewModel.ProjectListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Projets</h2>
+
+<p>
+    @Html.ActionLink("Ajouter un projet", "Create")
+</p>
+@Html.Partial("_ProjectList",Model)

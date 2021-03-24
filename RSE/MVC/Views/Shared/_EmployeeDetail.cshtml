@@ -1,0 +1,124 @@
+﻿@model MVC.Models.ViewModel.EmployeeDetails
+
+
+<h2>@Html.DisplayFor(model => model.FirstName), @Html.DisplayFor(model => model.LastName)</h2>
+
+<div>
+    <h4>Informations de contact</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            <a href="mailto:@Model.Email">@Model.Email</a>
+            @if (((MVC.Models.User)HttpContext.Current.Session["User"]).Id != Model.Id)
+            {
+                <p>
+                    @Html.ActionLink("Envoyer un message en interne", "NewMessage", new { id = Model.Id })
+                </p>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GSM)
+        </dt>
+
+        <dd>
+            <a href="callto:@Model.GSM">@Model.GSM</a>
+        </dd>
+    </dl>
+</div>
+<div>
+    <h5>Statut</h5>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+        @if (Model.Department.Name != null)
+        {
+            <dd>@Html.ActionLink(Model.Department.Name, "Details", new { controller = "Department", id = Model.Department.Id })</dd>
+        }
+        else
+        {
+            <dd>
+                <span>Membre d'aucun département</span>@if (((MVC.Models.User)HttpContext.Current.Session["User"]).AdminId != null)
+                {
+                    <span>, </span>@Html.ActionLink("l'affecter à un département?", "Edit", new { area = "Admin", controller = "Employee", id = Model.Id })
+                }
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.StateName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StateName)
+        </dd>
+        @if (Model.StateId != 0)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+        }
+
+    </dl>
+</div>
+<div>
+    <h5>Adresse</h5>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address.Street)
+            @Html.DisplayFor(model => model.Address.Number)
+            @Html.DisplayFor(model => model.Address.NumberBox)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Address.ZipCode)
+            @Html.DisplayFor(model => model.Address.City)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Address.Country)
+        </dd>
+        <dd>
+            <a href="https://www.google.com/maps/place/@Model.Address.GMapAddress/" target="_blank">Trouver sur GoogleMap</a>
+        </dd>
+</div>
+<div>
+    <h5>Autres informations</h5>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HireDate)
+        </dd>
+
+    </dl>
+</div>

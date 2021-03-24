@@ -1,0 +1,26 @@
+﻿@model MVC.Models.ViewModel.Subject
+
+@{
+    ViewBag.Title = "Subject";
+    MVC.Models.User UserSession = (MVC.Models.User)HttpContext.Current.Session["User"];
+    string Id = Context.Request.Url.Segments.Last();
+}
+
+<h2>@Html.DisplayFor(model => model.Title)</h2>
+
+<div id="MessagingZone">
+    @Html.Partial("_Subject",Model)
+</div>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    <script type="text/javascript">
+        function myMessageInitialize() {
+            $(".chatMessageItem[senderid='@UserSession.Id']").addClass("myMessage");
+            $("#answerMessageForm").val("").focus();
+        }
+        $(document).ready(function () {
+            myMessageInitialize();
+        });
+    </script>
+}

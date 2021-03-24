@@ -1,0 +1,26 @@
+﻿@model MVC.Models.ViewModel.EventIndex
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Évènements</h2>
+
+
+<div>
+    <h4>Mes évènements</h4>
+    <hr />
+    <p>
+        @Html.ActionLink("Nouvel évènement", "Create")
+    </p>
+    @Html.Partial("_EventList", Model.EventCreated)
+</div>
+<div>
+    <h4>Mes invitations</h4>
+    <hr />
+    @Html.Partial("_InviteList", Model.EventInvited)
+</div>
+
+@section scripts{
+    
+}

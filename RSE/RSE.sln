@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC", "MVC\MVC.csproj", "{219E7563-4560-4601-9442-1878979C5E9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolBox", "..\ToolBox\ToolBox\ToolBox.csproj", "{3DD66EE8-19E0-44C4-A5EB-130C8856B980}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model.Client", "Client\Model.Client.csproj", "{6936B604-E803-42DB-A3EC-07B9ED12DEE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model.Global", "Global\Model.Global.csproj", "{DD9FDCE2-795A-4345-A5B7-64AD6489135C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{1CBC735B-579C-44F4-B13C-67F34823838E}"
+	ProjectSection(SolutionItems) = preProject
+		SQL\SP_UpdateEmployee.sql = SQL\SP_UpdateEmployee.sql
+		SQL\V_AdminActive.sql = SQL\V_AdminActive.sql
+		SQL\V_AdminDetailActive.sql = SQL\V_AdminDetailActive.sql
+		SQL\V_AdminDetailFull.sql = SQL\V_AdminDetailFull.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{219E7563-4560-4601-9442-1878979C5E9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{219E7563-4560-4601-9442-1878979C5E9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{219E7563-4560-4601-9442-1878979C5E9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{219E7563-4560-4601-9442-1878979C5E9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DD66EE8-19E0-44C4-A5EB-130C8856B980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DD66EE8-19E0-44C4-A5EB-130C8856B980}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DD66EE8-19E0-44C4-A5EB-130C8856B980}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DD66EE8-19E0-44C4-A5EB-130C8856B980}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6936B604-E803-42DB-A3EC-07B9ED12DEE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6936B604-E803-42DB-A3EC-07B9ED12DEE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6936B604-E803-42DB-A3EC-07B9ED12DEE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6936B604-E803-42DB-A3EC-07B9ED12DEE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD9FDCE2-795A-4345-A5B7-64AD6489135C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD9FDCE2-795A-4345-A5B7-64AD6489135C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD9FDCE2-795A-4345-A5B7-64AD6489135C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD9FDCE2-795A-4345-A5B7-64AD6489135C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EBC61D36-078E-413F-A524-A900BCF06009}
+	EndGlobalSection
+EndGlobal

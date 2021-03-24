@@ -1,0 +1,9 @@
+﻿@model IEnumerable<MVC.Models.ViewModel.EmployeeListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Liste des employés</h2>
+
+@Html.Partial("_EmployeeList",Model)

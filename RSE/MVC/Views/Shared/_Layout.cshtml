@@ -1,0 +1,78 @@
+﻿@{MVC.Models.User UserSession = (MVC.Models.User)HttpContext.Current.Session["User"];}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mon application ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/RSE_Style")
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/RSE_Style")
+</head>
+<body>
+
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (UserSession == null)
+                    {
+                        if (Context.Request.Url.Segments.Last().ToString() != "Login")
+                        {
+                            <li>@Html.ActionLink("Se connecter", "Login", "Auth", new { area = "" }, new { @class = "navbar-brand login" })</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("S'enregistrer", "Register", "Auth", new { area = "" }, new { @class = "navbar-brand register" })</li>
+                        }
+                        <li>@Html.ActionLink("Administration", "Login", "Auth", new { area = "Admin" }, new { @class = "navbar-brand adminside" })</li>
+
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Accueil", "Index", "Member", new { area = "" }, new { @class = "navbar-brand home" })</li>
+                        <li>@Html.ActionLink("Mon Profil", "ProfilDetail", "Member", new { area = "" }, new { @class ="user" })</li>
+                        <li>@Html.ActionLink("Mes messages", "Index", "Message", new { area = "" }, new { @class = "message" })</li>
+                        <li>@Html.ActionLink("Mes évènements", "Index", "Event", new { area = "" }, new { @class = "event" })</li>
+                        <li>@Html.ActionLink("Mon planning", "Index", "Planning", new { area = "" }, new { @class = "planning" })</li>
+                        <li>@Html.ActionLink("Documents", "Index", "Document", new { area = "" }, new { @class = "document" })</li>
+                        <li>@Html.ActionLink("Départements", "Index", "Department", new { area = "" }, new { @class = "department" })</li>
+                        <li>@Html.ActionLink("Projets", "Index", "Project", new { area = "" }, new { @class = "project" })</li>
+                        if (UserSession.AdminId != null)
+                        {
+                            <li>@Html.ActionLink("Administration", "Index", "Employee", new { area = "Admin" }, new { @class = "navbar-brand adminside" })</li>
+                        }
+                        <li>@Html.ActionLink("Se déconnecter", "Logout", "Auth", new { area = "" }, new { @class = "navbar-brand logout" })</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            @Html.Partial("_footer")
+        </footer>
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

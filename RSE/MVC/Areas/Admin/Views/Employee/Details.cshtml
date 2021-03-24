@@ -1,0 +1,13 @@
+﻿@model MVC.Models.ViewModel.EmployeeDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@Html.Partial("_EmployeeDetail", Model)
+
+<p>
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Désactiver", "Delete", new { id = Model.Id }) |
+    @Html.ActionLink("Retour à la liste", "Index")
+</p>

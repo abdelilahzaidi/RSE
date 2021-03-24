@@ -1,0 +1,95 @@
+﻿@model MVC.Models.ViewModel.MessageCreateForm
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Nouvelle conversation/sujet</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Veuillez compléter le formulaire et confirmer l'envois</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReceiverKind, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="col-md-10">
+                    <div><label for="radio1">Collègue</label>@Html.RadioButtonFor(model => model.ReceiverKind, "Employee", new { @id = "radio1",@checked="checked" })</div>
+                    <div><label for="radio2">Equipe</label>@Html.RadioButtonFor(model => model.ReceiverKind, "Team", new { @id = "radio2" })</div>
+                    @Html.ValidationMessageFor(model => model.ReceiverKind, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReceiverId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.ReceiverId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ReceiverId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Envoyer" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Retour à la liste des messages", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        function changeReceiverKind() {
+            if ($('input[type=radio]:checked').val() == "Employee") {
+                $("#ReceiverId").replaceWith('<input id="ReceiverId" name="ReceiverId" type="text" class="form-control"></input>');
+            }
+            else {
+                /*$("#ReceiverId").replaceWith('<select id="ReceiverId" name="ReceiverId"></select>');
+                $("#ReceiverId").append('<option value ="1">Nope</option>');
+                $("#ReceiverId").append('<option value ="2">Nope2</option>');
+                $("#ReceiverId").append('<option value ="3">Nope3</option>');*/
+                $.ajax({
+                    url: '/Message/AjaxTeamDropDownListByEmployee',
+                    dataType: 'html',
+                    success: function (data) {
+                        $("#ReceiverId").replaceWith(data);
+                        $("#SelectedValue").attr("id", "ReceiverId").attr("name", "ReceiverId");
+                    }
+                });
+            }
+        };
+        $(document).ready(function () {
+            changeReceiverKind();
+            $('input[type=radio]').on('change', function () {
+                changeReceiverKind();
+                console.log('changed');
+            });
+        });
+    </script>
+}

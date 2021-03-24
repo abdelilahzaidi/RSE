@@ -1,0 +1,39 @@
+﻿@model MVC.Models.ViewModel.TeamListItem
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Suppression de l'équipe @Model.Name</h2>
+
+<h3>Êtes-vous de vouloir supprimer cette équipe?</h3>
+<div>
+    <h4>@Model.Name</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamManager)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamManager.Name)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Supprimer" class="btn btn-default" /> |
+        @Html.ActionLink("Retour vers le projet", "Details", new { controller = "Project", id = Model.ProjectId })
+    </div>
+    }
+</div>

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MVC.Areas.Admin.Models.ViewModel.ProjectListItem>
+
+@{var isfull = Context.Request.Url.ToString(); }
+@{
+    ViewBag.Title = "Projects";
+}
+
+<h2>Projets</h2>
+
+<p>
+    @if (isfull.Substring(isfull.Length - 2, 2) == "ue")
+    {
+        @Html.ActionLink("Liste des projets actifs", "index", new { showAll = false })
+
+    }
+    else
+    {
+        @Html.ActionLink("Liste complète", "index", new { showAll = true })
+
+    }
+</p>
+@Html.Partial("_ProjectList", Model)
+<p>
+
+
+
+    <!--@Html.ActionLink("Liste Complet", "Index",new { id = 1})
+    @Ajax.ActionLink("Liste Completa", "Index", new { id = 1 }, new AjaxOptions { HttpMethod = "POST"})-->
+</p>

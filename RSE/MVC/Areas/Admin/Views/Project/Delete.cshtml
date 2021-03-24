@@ -1,0 +1,65 @@
+﻿@model Model.Client.Data.Project
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Vous allez mettre fin au projet "@Model.Name"</h2>
+
+<h3>Êtes-vous sûr de vouloir mettre fin au projet?</h3>
+<div>
+    <h4>Informations générales</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectManager)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectManager)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Supprimer" class="btn btn-default" /> |
+        @Html.ActionLink("Revenir à la liste des projets", "Index", new { id = Model.Id }) |
+        @Html.ActionLink("Revenir aux détails du projet", "Details", new { area = "", id = Model.Id })
+    </div>
+    }
+</div>

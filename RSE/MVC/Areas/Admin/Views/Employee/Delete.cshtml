@@ -1,0 +1,129 @@
+﻿@model MVC.Models.ViewModel.EmployeeDetails
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Vous allez désactiver l'utilisateur "@Model.FirstName, @Model.LastName"</h2>
+
+<h3>En désactivant ce compte, l'utilisateur ne pourra plus se connecter. Êtes-vous sûr de vouloir le désactiver?</h3>
+<div>
+    <h4>Informations de contact</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model=>model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GSM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model=>model.GSM)
+        </dd>
+    </dl>
+</div>
+<div>
+    <h5>Statut</h5>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+        @if (Model.Department.Name != null)
+        {
+            <dd>@Html.DisplayFor(model=>model.Department.Name)</dd>
+        }
+        else
+        {
+            <dd>
+                <span>Membre d'aucun département</span>
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.StateName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StateName)
+        </dd>
+        @if (Model.StateId != 0)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+        }
+
+    </dl>
+</div>
+<div>
+    <h5>Adresse</h5>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address.Street)
+            @Html.DisplayFor(model => model.Address.Number)
+            @Html.DisplayFor(model => model.Address.NumberBox)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Address.ZipCode)
+            @Html.DisplayFor(model => model.Address.City)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Address.Country)
+        </dd>
+        <dd>
+            <a href="https://www.google.com/maps/place/@Model.Address.GMapAddress/" target="_blank">Trouver sur GoogleMap</a>
+        </dd>
+</div>
+<div>
+    <h5>Autres informations</h5>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HireDate)
+        </dd>
+
+    </dl>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Désactiver" class="btn btn-default" /> |
+        @Html.ActionLink("Revenir à la liste des comptes", "Index")
+    </div>
+}
+</div>

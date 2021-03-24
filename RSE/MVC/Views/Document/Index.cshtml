@@ -1,0 +1,13 @@
+﻿@model IEnumerable<MVC.Models.ViewModel.DocumentList>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Documents</h2>
+
+<p>
+    @Html.ActionLink("Ajouter un document", "Create")
+</p>
+
+@Html.Partial("_DocumentList",Model)

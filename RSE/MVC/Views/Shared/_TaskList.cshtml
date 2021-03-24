@@ -1,0 +1,76 @@
+﻿@model IEnumerable<MVC.Models.ViewModel.TaskListItem>
+@{string noAssign = "Non assigné";
+    string team = "Équipe";
+    string employee = "Employé";
+    string ControllerName = "Team";}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskTeam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeadLine)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskState)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @if (item.TaskTeam)
+                    {
+                        ControllerName = "Team";
+                        @Html.DisplayFor(modelItem => team)
+                    }
+                    else
+                    {
+                        ControllerName = "Employee";
+                        @Html.DisplayFor(modelItem => employee)
+                    }
+                </td>
+                <td>
+                    @if (item.CurrentOn.Name != null)
+                    {
+                        @Html.ActionLink(item.CurrentOn.Name, "Details", new { controller = ControllerName, id = item.CurrentOn.Id });
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => noAssign);
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeadLine)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskState)
+                </td>
+                <td>
+                    @Html.ActionLink("Modifier", "Edit", new { controller = "Task", id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { controller = "Task", id = item.Id })@* |
+                    @Html.ActionLink("Supprimer", "Delete", new { controller = "Task", id = item.Id })]*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MVC.Models.ViewModel.TeamListItem>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamManager)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.ActionLink(item.TeamManager.Name, "Details", new { controller = "Employee", id = item.TeamManager.Id })
+                </td>
+                <td>
+                    @Html.ActionLink("Modifer", "Edit", new { controller = "Team", id = item.Id }) |
+                    @Html.ActionLink("Détails", "Details", new { controller = "Team", id = item.Id }) |
+                    @Html.ActionLink("Supprimer", "Delete", new { controller = "Team", id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

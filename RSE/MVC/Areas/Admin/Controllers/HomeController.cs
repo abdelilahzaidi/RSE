@@ -1,0 +1,27 @@
+﻿using MVC.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace MVC.Areas.Admin.Controllers
+{
+    [AuthRequiredAsAdmin]
+    public class HomeController : Controller
+    {
+        // GET: Admin/Home
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+
+        public ActionResult Department()
+        {
+            return RedirectToAction("Index", "Department");
+        }
+
+        
+    }
+}

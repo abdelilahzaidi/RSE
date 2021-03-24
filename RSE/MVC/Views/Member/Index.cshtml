@@ -1,0 +1,108 @@
+﻿@model IEnumerable<MVC.Models.ViewModel.PlanningItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="planningHeader">
+    <h2>Mon planning</h2>
+
+</div>
+<div id="fullCalendarZone"></div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/fullCalendar")
+    @Styles.Render("~/Content/fullCalendar")
+    <script type="text/javascript">
+        $(function () {
+            $('#fullCalendarZone').fullCalendar({
+                locale:'fr',
+                timezone: 'local',
+                defaultView: 'listWeek',
+                eventSources: [
+                    {
+                        url: '../Planning/AllEvent?type=EmployeeState',
+                        color: '#FF0000',
+                        textColor: '#FFFFFF'
+                    },
+                    {
+                        url: '../Planning/AllEvent?type=Employee_BirthDay',
+                        color: '#FF0000',
+                        textColor: '#FFFFFF'
+                    },
+                    {
+                        url: '../Planning/AllEvent?type=Employee_HireDay',
+                        color: '#FF0000',
+                        textColor: '#FFFFFF'
+                    },
+                    {
+                        url: '../Planning/AllEvent?type=Task_Employee',
+                        color: '#FF0000',
+                        textColor: '#FFFFFF'
+                    },
+                    {
+                        url: '../Planning/AllEvent?type=Task_Team',
+                        color: '#FF0000',
+                        textColor: '#FFFFFF'
+                    },
+                    {
+                        url: '../Planning/AllEvent?type=Event_InviteWaited',
+                        color: '#DFDFF7',
+                        textColor: '#0A2463'
+                    },
+                    {
+                        url: '../Planning/AllEvent?type=Event_Organisator',
+                        color: '#DFDFF7',
+                        textColor: '#E58506'
+                    },
+                    {
+                        url: '../Planning/AllEvent?type=Event_InvitePresent',
+                        color: '#DFDFF7',
+                        textColor: '#399126'
+                    },
+                    {
+                        url: '../Planning/AllEvent?type=Event_InviteNotPresent',
+                        color: '#DFDFF7',
+                        textColor: '#C2263C'
+                    },
+                    {
+                        url: '../Planning/AllEvent?type=Project_Managed',
+                        color: '#DFDFF7',
+                        textColor: '#399126'
+                    },
+                    {
+                        url: '../Planning/AllEvent?type=Project_Participed',
+                        color: '#DFDFF7',
+                        textColor: '#C2263C'
+                    }
+                ],
+                eventClick: function (event) {
+                    switch (event.type) {
+                        case 'Task_Employee':
+                        case 'Task_Team':
+                            window.location.href = "../Task/Details/" + event.id;
+                            break;
+                        case 'Event_Organisator':
+                        case 'Event_InvitePresent':
+                            window.location.href = "../Event/Details/" + event.id;
+                            break;
+                        case 'Event_InviteWaited':
+                        case 'Event_InviteNotPresent':
+                            window.location.href = "../Event/";
+                            break;
+                        case 'Project_Managed':
+                        case 'Project_Participed':
+                            window.location.href = "../Project/Details/" + event.id;
+                            break;
+                        case 'Employee_BirthDay':
+                        case 'Employee_HireDay':
+                            window.location.href = "../Message/Create/" + event.id;
+                            break;
+                        default:
+                            break;
+                    }
+                },
+                height: $(window).height() - $('.body-content').height() - $('footer').height()
+            })
+        })
+    </script>
+}

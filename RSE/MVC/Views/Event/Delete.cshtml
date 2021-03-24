@@ -1,0 +1,89 @@
+﻿@model MVC.Models.ViewModel.EventDetail
+@{MVC.Models.User UserSession = (MVC.Models.User)HttpContext.Current.Session["User"];}
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Suppression de l'évènement "@Model.Name"</h2>
+
+<h3>Êtes-vous sûr de vouloir supprimer cet évenèment?</h3>
+<div>
+    <h4>Détails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @if (Model.Description != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address.Street)
+            @Html.DisplayFor(model => model.Address.Number)
+            @Html.DisplayFor(model => model.Address.NumberBox)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Address.ZipCode)
+            @Html.DisplayFor(model => model.Address.City)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Address.Country)
+        </dd>
+        <dd>
+            <a href="https://www.google.com/maps/place/@Model.Address.GMapAddress/" target="_blank">Trouver sur GoogleMap</a>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        @if (Model.EndDate != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+        }
+        @if (Model.FullDay)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.FullDay)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FullDay)
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.Creator)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.Creator.Name)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("Retour à la liste des évènements", "Index")
+        </div>
+    }
+</div>

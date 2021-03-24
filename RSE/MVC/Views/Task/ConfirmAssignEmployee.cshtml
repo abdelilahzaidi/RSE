@@ -1,0 +1,57 @@
+﻿@model MVC.Models.ViewModel.EmployeeDetails
+
+@{
+    ViewBag.Title = "ConfirmAssignEmployee";
+}
+
+<h2>Assigner @Model.FirstName, @Model.LastName à la tâche</h2>
+
+<h3>Voulez-vous assigner cet(te) employé(e) à la tâche?</h3>
+<div>
+    <h4>Votre choix</h4>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+    <dl class="dl-horizontal">
+        @Html.HiddenFor(model => model.Id)
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GSM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GSM)
+        </dd>
+
+    </dl>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Confirmer" class="btn btn-default" /> |
+            @Html.ActionLink("Revenir à la liste des employés", "AssignEmployee", new { id = Request.Params.GetValues("taskId")[0] })
+        </div>
+    }
+</div>

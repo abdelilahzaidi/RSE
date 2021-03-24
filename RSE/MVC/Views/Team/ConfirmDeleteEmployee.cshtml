@@ -1,0 +1,63 @@
+﻿@model MVC.Models.ViewModel.ProfilDetail
+
+@{
+    ViewBag.Title = "ConfirmDeleteEmployee";
+}
+
+<h2>Vous allez supprimer @Model.FirstName, @Model.LastName de votre équipe</h2>
+
+<h3>Êtes-vous sûr de vouloir le supprimer de l'équipe?</h3>
+<div>
+    <h4>@Model.FirstName, @Model.LastName</h4>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+    <dl class="dl-horizontal">
+        @Html.HiddenFor(model => model.Id)
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GSM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GSM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address.Street)
+            @Html.DisplayFor(model => model.Address.Number)
+            @Html.DisplayFor(model => model.Address.NumberBox)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Address.ZipCode)
+            @Html.DisplayFor(model => model.Address.City)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Address.Country)
+        </dd>
+
+        @Html.HiddenFor(model => model.BirthDate)
+        @Html.HiddenFor(model => model.RegNat)
+        @Html.HiddenFor(model => model.HireDate)
+    </dl>
+
+
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("Retour aux détails de l'équipe", "Details", new { id = (int)Context.Request.Url.Fragment.Last() })
+        </div>
+        }
+</div>

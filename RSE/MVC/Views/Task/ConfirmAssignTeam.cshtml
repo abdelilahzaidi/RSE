@@ -1,0 +1,50 @@
+﻿@model MVC.Models.ViewModel.TeamDetail
+
+@{
+    ViewBag.Title = "ConfirmAssignTeam";
+}
+
+<h2>Assigner l'équipe "@Model.Name" à la tâche</h2>
+
+<h3>Voulez-vous assigner cette équipe à la tâche?</h3>
+<div>
+    <h4>Votre choix</h4>
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+    <dl class="dl-horizontal">
+        @Html.HiddenFor(model => Model.Id)
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamManager)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamManager.Name)
+        </dd>
+
+
+    </dl>
+        <div class="form-actions no-color">
+            <input type="submit" value="Confirmer" class="btn btn-default" /> |
+            @Html.ActionLink("Revenir à la sélection d'équipe", "AssignTeam", new { id = Request.Params.GetValues("taskId")[0] })
+        </div>
+    }
+</div>

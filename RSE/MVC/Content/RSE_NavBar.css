@@ -1,0 +1,166 @@
+﻿body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 92px;
+    background-color:#FFF;
+}
+
+.navbar {
+    display: flex;
+    background-color: #1e1e1e;
+    max-width: 64px;
+    height: 100%;
+    -webkit-transition: all .3s linear 0s;
+    transition: all .3s linear 0s;
+}
+
+.navbar.open{
+    max-width:256px;
+}
+
+ul.nav.navbar-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-nav > li > a.employees {
+    background: url(../Content/RSE_IconSet/EmployeesDark.png) no-repeat top left;
+    background-size: 64px;
+}
+.navbar-nav > li > a.home {
+    background: url(../Content/RSE_IconSet/Home.png) no-repeat top left;
+    background-size: 64px;
+}
+.navbar-nav > li > a.employeeside {
+    background: url(../Content/RSE_IconSet/EmployeeSide.png) no-repeat top left;
+    background-size: 64px;
+}
+.navbar-nav > li > a.adminside {
+    background: url(../Content/RSE_IconSet/AdminSide.png) no-repeat top left;
+    background-size: 64px;
+}
+.navbar-nav > li > a.register {
+    background: url(../Content/RSE_IconSet/Register.png) no-repeat top left;
+    background-size: 64px;
+}
+.navbar-nav > li > a.user {
+    background: url(../Content/RSE_IconSet/User.png) no-repeat top left;
+    background-size: 64px;
+}
+.navbar-nav > li > a.project {
+    background: url(../Content/RSE_IconSet/Project.png) no-repeat top left;
+    background-size: 64px;
+}
+.navbar-nav > li > a.message {
+    background: url(../Content/RSE_IconSet/Message.png) no-repeat top left;
+    background-size: 64px;
+}
+.navbar-nav > li > a.planning {
+    background: url(../Content/RSE_IconSet/Planning.png) no-repeat top left;
+    background-size: 64px;
+}
+.navbar-nav > li > a.department {
+    background: url(../Content/RSE_IconSet/Department.png) no-repeat top left;
+    background-size: 64px;
+}
+.navbar-nav > li > a.document {
+    background: url(../Content/RSE_IconSet/Document.png) no-repeat top left;
+    background-size: 64px;
+}
+.navbar-nav > li > a.event {
+    background: url(../Content/RSE_IconSet/Event.png) no-repeat top left;
+    background-size: 64px;
+}
+.navbar-nav > li > a.login {
+    background: url(../Content/RSE_IconSet/Login.png) no-repeat top left;
+    background-size: 64px;
+}
+.navbar-nav > li > a.logout {
+    background: url(../Content/RSE_IconSet/Logout.png) no-repeat top left;
+    background-size: 64px;
+}
+.navbar-nav > li > a.admin {
+    background: url(../Content/RSE_IconSet/User.png) no-repeat top left;
+    background-size: 64px;
+}
+
+@media (max-height:704px) {
+    .navbar-nav > li > a {
+        background-size: 48px !important;
+    }
+
+    .navbar-nav > li > a, .navbar-collapse > a {
+        height: 48px !important;
+    }
+}
+.navbar-nav > li > a, .navbar-collapse > a {
+    font-family:'Kanit',sans-serif;
+    display: block;
+    height: 64px;
+    width:64px;
+    text-indent: -9999px; /* hides the link text */
+    -webkit-transition: all .3s linear 0s;
+    transition: all .3s linear 0s;
+}
+
+.navbar-nav > li > a:hover, .navbar-collapse > a:hover {
+    background-color:#272a68 !important;
+}
+
+.navbar-selected {
+    background-color: darkblue !important;
+}
+
+.open > .container > .navbar-collapse > .nav > li > a, .open > .container > .navbar-collapse > a {
+    width: 256px;
+    text-indent: 64px; /* hides the link text */
+}
+
+.navbar-nav>li>div{
+    background-color:yellow;
+}
+
+/*------Disable collapsing bootstrap-------*/
+.navbar-collapse.collapse {
+    display: block !important;
+}
+
+.navbar-nav > li, .navbar-nav {
+    float: left !important;
+}
+
+    .navbar-nav.navbar-right:last-child {
+        margin-right: -15px !important;
+    }
+
+.navbar-right {
+    float: right !important;
+}
+
+.navbar-toggle {
+    display: none !important;
+}
+.navbar-nav {
+    margin: 7.5px -15px !important;
+}
+
+.navbar-nav > li > a {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+    margin-left: -15px !important;
+}
+
+.navbar-collapse {
+    width: auto !important;
+    border-top: 0 !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.navbar > .container .navbar-brand {
+    margin-left:0 !important;
+}
+/*----------------------------------------*/

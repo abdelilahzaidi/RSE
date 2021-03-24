@@ -1,0 +1,53 @@
+﻿@model MVC.Models.ViewModel.Messaging
+@Styles.Render(@"~/Content/chatMessage.css")
+@{
+    MVC.Models.User UserSession = (MVC.Models.User)HttpContext.Current.Session["User"];
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.Title</h2>
+<p>avec <span>
+    @foreach (var participant in Model.Participants)
+    {
+        if (participant.Id != UserSession.Id)
+        {
+            @Html.ActionLink(participant.Name, "Details", new { controller = "Employee", id = participant.Id });
+        }
+        else
+        {
+            <span>vous</span>
+        }
+        if (participant.Id != Model.Participants.Last().Id)
+        {
+            <span>, </span>
+        }
+    }
+    </span>
+</p>
+
+<p>
+    @Html.ActionLink("Répondre", "Answer", new { id = Model.LastMessageId })
+</p>
+<div id="MessagingZone">
+    @Html.Partial("_Messaging", Model)
+</div>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    <script type="text/javascript">
+        function checkContent() {
+            if ($.trim($("#answerMessageForm").val()) == '')
+                return false;
+            return true;
+        };
+        function myMessageInitialize() {
+            $(".chatMessageItem[senderid='@UserSession.Id']").addClass("myMessage");
+            $("#answerMessageForm").val("").focus();
+            $("#MessageZone").css("max-height", $(window).height() - ($(document).height() - $("#MessageZone").height()));
+            $("#MessageZone").scrollTop($("#MessageZone")[0].scrollHeight);
+        };
+        $(document).ready(function () {
+            myMessageInitialize();
+        });
+    </script>
+}

@@ -1,0 +1,56 @@
+﻿@model MVC.Models.ViewModel.DepartmentDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Html.DisplayFor(model => model.Name)</h2>
+
+<div>
+    <h4>Informations</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin)
+        </dt>
+
+        <dd>
+            @Html.ActionLink(Model.Admin.Name, "Details", new { controller = "Employee", id = Model.Admin.Id })
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <h5>@Html.DisplayNameFor(model => model.Members)</h5>
+    <hr />
+    @Html.Partial("_EmployeeList", Model.Members)
+</div>
+
+<div>
+    <h5>@Html.DisplayNameFor(model => model.Docs)</h5>
+    <hr />
+    @if (Model.Docs.Count() != 0)
+    {
+        <p>
+            @Html.ActionLink("Ajouter un nouveau document", "NewDoc", new { id = Model.Id })
+        </p>
+        @Html.Partial("_DocumentList", Model.Docs)}
+    else
+    {
+        <span>Aucun document</span>
+        <p>
+            @Html.ActionLink("Ajoutez votre premier document", "NewDoc", new { id = Model.Id })
+        </p>
+    }
+</div>
+<p>
+    @Html.ActionLink("retour à la liste des départements", "Index")
+</p>

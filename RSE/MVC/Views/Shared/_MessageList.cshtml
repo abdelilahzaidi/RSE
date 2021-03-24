@@ -1,0 +1,15 @@
+﻿@model IEnumerable<MVC.Models.ViewModel.MessageListItem>
+
+
+@foreach (var item in Model)
+{    
+<div class="chatMessageItem" senderId="@item.Sender.Id">
+    <div class="chatMessageSender">
+        <b>@Html.ActionLink(item.Sender.Name,"Details",new { controller = "Employee",id=item.Sender.Id})</b>
+    </div>
+    <div class="chatMessageTextItem">
+        <p class="chatMessageText">@item.Message</p>
+        <p class="chatMessageDate">@item.Date</p>
+    </div>
+</div>
+}

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MVC.Models.ViewModel.DepartmentListItem>
+@{MVC.Models.User UserSession = (MVC.Models.User)HttpContext.Current.Session["User"];}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Admin)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink(item.Admin.Name, "Details", new { controller = "Employee", id = item.Admin.Id })
+                </td>
+                <td>
+                    @if (UserSession.AdminId != null)
+                    {
+                        @Html.ActionLink("Modifier", "Edit", new { area = "admin", id = item.Id })<span> | </span>
+                        @Html.ActionLink("Détails", "Details", new { area = "", id = item.Id })<span> | </span>
+                        @Html.ActionLink("Supprimer", "Delete", new { area = "admin", id = item.Id })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Détails", "Details", new { area = "", id = item.Id })
+                    }
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

@@ -1,0 +1,103 @@
+﻿@model MVC.Models.ViewModel.DocumentCreateForm
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Ajout d'un document</h2>
+
+
+@using (Html.BeginForm("Create", "Document", FormMethod.Post, new { id = "attachment",enctype="multipart/form-data",encoding="multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Veuillez insérer un document et compléter le formulaire</h4>
+    <hr />
+    <input id="FileBinary" type="file" name="FileBinary" />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Kind, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div><label for="radio1">Tâche</label>@Html.RadioButtonFor(model => model.Kind, "Task", new { @id = "radio1", @checked = "checked" })</div>
+            <div><label for="radio2">Projet</label>@Html.RadioButtonFor(model => model.Kind, "Project", new { @id = "radio2"})</div>
+            <div><label for="radio3">Évènement</label>@Html.RadioButtonFor(model => model.Kind, "Event", new { @id = "radio3"})</div>
+            <div><label for="radio4">Départment</label>@Html.RadioButtonFor(model => model.Kind, "Department", new { @id = "radio4"})</div>
+            <div><label for="radio5">Équipe</label>@Html.RadioButtonFor(model => model.Kind, "Team", new { @id = "radio5"})</div>
+            @Html.ValidationMessageFor(model => model.Kind, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReceiverId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.ReceiverId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ReceiverId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @Html.Partial("_DocumentCreateFormBase",Model)
+</div>
+}
+
+<div>
+    @Html.ActionLink("Retour à la liste des documents", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+
+    function convertDate(value) {
+        var date = new Date(value);
+        return (date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
+    }
+
+    function changeReceiverKind(kind) {
+        
+            $.ajax({
+                url: '/Document/Ajax'+kind+'DropDownListByEmployee',
+                dataType: 'html',
+                success: function (data) {
+                    $("#ReceiverId").replaceWith(data);
+                    $("#SelectedValue").attr("id", "ReceiverId").attr("name", "ReceiverId");
+                }
+            });
+    };
+
+    $(document).ready(function () {
+        console.log("loaded");
+        $(document).bind("change", "#FileBinary", function () {
+            //console.log("changed" + $("#FileBinary")[0].files[0].name);
+            var name = $("#FileBinary")[0].files[0].name;
+            var array= name.split('.');
+            var extention = array[array.length - 1];
+            var shortName = name.substring(0, name.length - 1 - extention.length);
+            var lastModified = new Date($("#FileBinary")[0].files[0].lastModified);
+                   
+
+            
+            
+            $("#Name").val(shortName);
+            $("#indicativName").html(  shortName);
+            $("#Size").val($("#FileBinary")[0].files[0].size);            
+            $("#indicativSize").html('<p>' + $("#Size").val() / 1024 + ' kb </p>');
+            $("#Extention").val(extention);
+            $("#indicativExtention").html(extention);
+            $("#ModifiedDate").val(convertDate(lastModified));
+            $("#indicativDate").html(convertDate(lastModified));
+           // $("#ModifiedDate").val(dateT);
+           // $("#indicativModifiedDate").html(dateT);
+       
+          
+        });
+
+        changeReceiverKind($('input[type=radio]:checked')[0].value);
+        $('input[type=radio]').on('change', function () {
+            changeReceiverKind($('input[type=radio]:checked')[0].value);
+            console.log('changed');
+        });
+    });
+    </script>
+}

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<MVC.Models.ViewModel.ConversationListItem>
+
+@{
+    ViewBag.Title = "Conversation";
+}
+
+<h2>Conversations</h2>
+
+<p>
+    @Html.ActionLink("Nouvelle conversation", "Create")
+</p>
+<h5>Filtres</h5>
+<p>
+    @Ajax.ActionLink("Toutes les conversations","AjaxIndexAll", new AjaxOptions()
+{
+ HttpMethod = "GET",
+ UpdateTargetId = "ConversationListZone",
+ InsertionMode = InsertionMode.Replace
+}) |
+@Ajax.ActionLink("Individuel","AjaxIndexEmployee", new AjaxOptions()
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "ConversationListZone",
+    InsertionMode = InsertionMode.Replace
+}) |
+@Ajax.ActionLink("En équipe","AjaxIndexTeam", new AjaxOptions()
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "ConversationListZone",
+    InsertionMode = InsertionMode.Replace
+})
+</p>
+<div id="ConversationListZone">
+    @Html.Partial("_ConversationList", Model)
+</div>
+@section scripts{
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")}

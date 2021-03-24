@@ -1,0 +1,13 @@
+﻿@model MVC.Models.ViewModel.DocumentCreateForm
+
+<div class="form-horizontal">
+        <h4>Veuillez insérer votre document</h4>
+        <hr />
+        <input id="FileBinary" type="file" name="FileBinary" />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.Kind)
+        @Html.HiddenFor(model => model.ReceiverId)
+
+        @Html.Partial("_DocumentCreateFormBase", Model)
+    </div>

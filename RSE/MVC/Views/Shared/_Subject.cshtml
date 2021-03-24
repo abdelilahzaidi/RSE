@@ -1,0 +1,11 @@
+﻿@model MVC.Models.ViewModel.Subject
+@{ 
+    MVC.Models.User UserSession = (MVC.Models.User)HttpContext.Current.Session["User"];
+}
+
+<div id="MessageZone">
+    @Html.Partial("_PostList", Model.Posts)
+</div>
+<div id="MessageAnswer">
+    @Html.Partial("_MessageAnswerForm", Model.AnswerForm)
+</div>
